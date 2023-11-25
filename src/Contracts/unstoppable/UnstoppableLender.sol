@@ -39,11 +39,11 @@ contract UnstoppableLender is ReentrancyGuard {
 
         // Ensured by the protocol via the `depositTokens` function
         if (poolBalance != balanceBefore) revert AssertionViolated();
-
+        //transfer to sender borrowed amount
         damnValuableToken.transfer(msg.sender, borrowAmount);
-
+        //is this receiver's callback trigger??can he get hold of control from this call??
         IReceiver(msg.sender).receiveTokens(address(damnValuableToken), borrowAmount);
-
+        //condition to check if lender received or not the loaned amount
         uint256 balanceAfter = damnValuableToken.balanceOf(address(this));
         if (balanceAfter < balanceBefore) revert FlashLoanHasNotBeenPaidBack();
     }

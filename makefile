@@ -2,7 +2,7 @@ Unstoppable:
 	forge test --match-test testExploit --match-contract Unstoppable
 
 NaiveReceiver:
-	forge test --match-test testExploit --match-contract NaiveReceiver
+	forge test --match-test testExploit --match-contract NaiveReceiver -vvvv
 
 Truster:
 	forge test --match-test testExploit --match-contract Truster

